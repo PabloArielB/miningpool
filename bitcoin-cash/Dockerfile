@@ -5,9 +5,9 @@ ca-certificates \
 curl \
 && rm -rf /var/lib/apt/lists/*
 
-ARG BITCOIN_CASH_VERSION
+ARG 0.31.2
 
-RUN curl https://download.bitcoinabc.org/$BITCOIN_CASH_VERSION/linux/bitcoin-abc-${BITCOIN_CASH_VERSION}-x86_64-linux-gnu.tar.gz \
+RUN curl https://download.bitcoinabc.org/0.31.2/linux/bitcoin-abc-0.31.2-x86_64-linux-gnu.tar.gz \
 | tar xz --wildcards --strip 2 \
 */bin/bitcoind \
 */bin/bitcoin-cli
@@ -25,7 +25,7 @@ EXPOSE 9333
 # ZeroMQ port.
 EXPOSE 9334
 
-RUN echo 'alias cli="bitcoin-cash-cli -rpcuser=$BITCOIN_CASH_RPC_USER -rpcpassword=$BITCOIN_CASH_RPC_PASSWORD"' > /root/.bash_aliases
+RUN echo 'alias cli="bitcoin-cash-cli -rpcuser=admin -rpcpassword=krausiano"' > /root/.bash_aliases
 
 # Copying required binaries from builder stage.
 COPY --from=builder bitcoind  /usr/local/bin/bitcoin-cashd
