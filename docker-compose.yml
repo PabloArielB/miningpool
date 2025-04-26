@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  bitcoind:
+    build: .
+    container_name: bitcoincash-node
+    volumes:
+      - bitcoind_data:/root/.bitcoin
+    ports:
+      - "8332:8332"   # RPC
+      - "8333:8333"   # P2P
+    restart: unless-stopped
+    networks:
+      - btc-net
+
+networks:
+  btc-net:
+    driver: bridge
+
+volumes:
+  bitcoind_data:
+    driver: local
